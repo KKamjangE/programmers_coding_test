@@ -1,6 +1,12 @@
-B = int(input())
-A = int(input())
-A_list = list(map(int, str(A)))
-for i in range(len(A_list)):
-    print(A_list[2-i]*B)
-print(A*B)
+import sys
+input = sys.stdin.readline
+
+a = int(input())
+b = int(input())
+
+arr = list(map(int, str(b)))
+
+for i in range(len(arr)):
+    print(arr[len(arr)-1-i] * a)
+
+print(a * b)
