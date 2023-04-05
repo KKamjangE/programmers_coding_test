@@ -1,19 +1,16 @@
-from collections import deque
-
 def solution(numbers, target):
     ans = 0
-    que = deque()
-    que.append([numbers[0], 0])
-    que.append([-numbers[0], 0])
 
-    while que:
-        tmp, idx = que.popleft()
-        idx += 1
-        if idx < len(numbers):
-            que.append([tmp + numbers[idx], idx])
-            que.append([tmp - numbers[idx], idx])
-        else:
-            if tmp == target:
+    def dfs(start, depth):
+        nonlocal ans
+        if depth == len(numbers):
+            if start == target:
                 ans += 1
-
+            return
+        
+        dfs(start + numbers[depth], depth + 1)
+        dfs(start - numbers[depth], depth + 1)
+    
+    dfs(0, 0)
+    
     return ans
