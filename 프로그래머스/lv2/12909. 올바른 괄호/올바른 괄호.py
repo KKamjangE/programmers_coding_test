@@ -1,11 +1,12 @@
 def solution(s):
-    ans = []
+    stack = []
+    
     for i in s:
         if i == "(":
-            ans.append(i)
-        if i == ")":
-            if ans:
-                ans.pop()
-            else:
-                return False
-    return True if not ans else False
+            stack.append(i)
+        elif stack and i == ")":
+            stack.pop()
+        else:
+            return False
+            
+    return True if not stack else False
