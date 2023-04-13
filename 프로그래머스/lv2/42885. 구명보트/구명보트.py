@@ -1,13 +1,19 @@
 def solution(people, limit):
-    boat = 0
+    ans = 0
     people.sort()
     
     a = 0
     b = len(people) - 1
-    while a < b:
-        if people[b] + people[a] <= limit:
+    while a <= b:
+        if a == b:
+            ans += 1
+            break
+        if people[a] + people[b] <= limit:
+            ans += 1
             a += 1
-            boat += 1
-        b -= 1
+            b -= 1
+        else:
+            ans += 1
+            b -= 1
     
-    return len(people) - boat
+    return ans
