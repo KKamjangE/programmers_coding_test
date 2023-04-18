@@ -1,10 +1,10 @@
 function solution(numbers, target) {
-  let ans = 0;
+  var answer = 0;
 
   const dfs = (value, depth) => {
     if (depth === numbers.length) {
       if (value === target) {
-        ans++;
+        answer++;
       }
       return;
     }
@@ -15,5 +15,5 @@ function solution(numbers, target) {
 
   dfs(0, 0);
 
-  return ans;
+  return answer;
 }
