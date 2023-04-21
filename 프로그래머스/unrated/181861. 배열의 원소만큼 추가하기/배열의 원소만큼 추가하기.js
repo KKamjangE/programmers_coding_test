@@ -1,11 +1,6 @@
 function solution(arr) {
-  let ans = [];
-
-  arr.forEach((value) => {
-    for (let i = 0; i < value; i++) {
-      ans.push(value);
-    }
-  });
-
-  return ans;
+  return arr.reduce(
+    (prev, curr) => [...prev, ...new Array(curr).fill(curr)],
+    []
+  );
 }
