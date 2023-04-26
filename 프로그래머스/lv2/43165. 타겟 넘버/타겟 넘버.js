@@ -1,19 +1,19 @@
 function solution(numbers, target) {
-  var answer = 0;
+  var ans = 0;
 
-  const dfs = (value, depth) => {
+  const DFS = (sum, depth) => {
     if (depth === numbers.length) {
-      if (value === target) {
-        answer++;
+      if (sum === target) {
+        ans += 1;
       }
       return;
     }
 
-    dfs(value + numbers[depth], depth + 1);
-    dfs(value - numbers[depth], depth + 1);
+    DFS(sum - numbers[depth], depth + 1);
+    DFS(sum + numbers[depth], depth + 1);
   };
 
-  dfs(0, 0);
+  DFS(0, 0);
 
-  return answer;
+  return ans;
 }
