@@ -1,7 +1,5 @@
 function solution(start, end) {
-  let ans = [];
-  for (let i = start; i >= end; i--) {
-    ans.push(i);
-  }
-  return ans;
+  return Array(start - end + 1)
+    .fill(start)
+    .map((value, index) => value - index);
 }
