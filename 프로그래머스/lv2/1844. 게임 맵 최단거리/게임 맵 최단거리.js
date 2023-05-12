@@ -1,31 +1,41 @@
 function solution(maps) {
-  const N = maps.length,
-    M = maps[0].length;
-  let visited = Array.from({ length: N }, () => new Array(M).fill(-1));
-  let dx = [1, -1, 0, 0],
-    dy = [0, 0, 1, -1];
+  let ans = 0;
+  const M = maps.length;
+  const N = maps[0].length;
 
-  let que = [[0, 0]];
-  visited[0][0] = 1;
+  let [dx, dy] = [
+    [1, -1, 0, 0],
+    [0, 0, 1, -1],
+  ];
+
+  let visited = Array.from({ length: M }, () =>
+    new Array(maps[0].length).fill(false)
+  );
+
+  let que = [[0, 0, 1]];
+
   while (que.length > 0) {
-    [x, y] = que.shift();
-
+    [x, y, depth] = que.shift();
+    if (M - 1 === x && N - 1 === y) {
+      ans = depth;
+      break;
+    }
     for (let i = 0; i < 4; i++) {
       let nx = x + dx[i];
       let ny = y + dy[i];
       if (
         0 <= nx &&
-        nx < N &&
+        nx < M &&
         0 <= ny &&
-        ny < M &&
-        visited[nx][ny] === -1 &&
-        maps[nx][ny] === 1
+        ny < N &&
+        maps[nx][ny] === 1 &&
+        !visited[nx][ny]
       ) {
-        visited[nx][ny] = visited[x][y] + 1;
-        que.push([nx, ny]);
+        visited[nx][ny] = true;
+        que.push([nx, ny, depth + 1]);
       }
     }
   }
 
-  return visited[N - 1][M - 1];
+  return ans ? ans : -1;
 }
