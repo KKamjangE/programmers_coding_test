@@ -1,9 +1,3 @@
 function solution(arr, delete_list) {
-  return arr
-    .map((value) => {
-      if (!delete_list.includes(value)) {
-        return value;
-      }
-    })
-    .filter((value) => value != undefined);
+  return arr.filter((value) => !delete_list.includes(value));
 }
