@@ -1,4 +1,5 @@
 function solution(s) {
+  if (s.length % 2 === 1) return 0;
   let ans = 0;
 
   const check = (str) => {
