@@ -1,16 +1,16 @@
 function solution(numbers, target) {
   let ans = 0;
 
-  const DFS = (value, depth) => {
-    if (depth === numbers.length) {
-      if (value === target) {
+  const DFS = (idx, sum) => {
+    if (idx === numbers.length) {
+      if (sum === target) {
         ans += 1;
       }
       return;
     }
 
-    DFS(value + numbers[depth], depth + 1);
-    DFS(value - numbers[depth], depth + 1);
+    DFS(idx + 1, sum + numbers[idx]);
+    DFS(idx + 1, sum - numbers[idx]);
   };
 
   DFS(0, 0);
