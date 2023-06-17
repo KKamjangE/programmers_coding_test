@@ -1,20 +1,20 @@
 function solution(progresses, speeds) {
-  let ans = [];
-
-  let days = 0;
-  let count = 0;
-  while (progresses.length) {
-    if (progresses[0] + days * speeds[0] >= 100) {
-      progresses.shift();
-      speeds.shift();
-      count += 1;
-    } else {
-      ans.push(count);
-      count = 0;
-      days += 1;
+    let ans = [];
+    let day = 1;
+    let end = 0;
+    let index = 0;
+    
+    while(progresses.length > index){
+        end = 0;
+        while(progresses[index] + (speeds[index] * day) >= 100){
+            end++;
+            index++;
+        }
+        if(end > 0){
+            ans.push(end);
+        }
+        day++;
     }
-  }
-  ans.push(count);
-
-  return ans.filter((value) => value != 0);
+    
+    return ans;
 }
