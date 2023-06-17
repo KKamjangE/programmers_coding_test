@@ -1,9 +1,14 @@
-function solution(arr) {
-  let ans = [];
+function solution(arr)
+{
+    const ans = [];
 
-  arr.forEach((value) => {
-    if (ans[ans.length - 1] != value) ans.push(value);
-  });
-
-  return ans;
+    arr.forEach((val) => {
+        if(ans.length === 0) {
+            ans.push(val)
+        } else {
+            if(ans[ans.length-1] != val) ans.push(val);    
+        }
+    })
+    
+    return ans;
 }
