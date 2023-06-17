@@ -1,17 +1,18 @@
-function solution(s) {
-  let stack = [];
-  for (i of s) {
-    if (i === "(") {
-      stack.push(i);
-    } else if (stack.length > 0 && i === ")") {
-      stack.pop();
-    } else {
-      return false;
+function solution(s){
+    if(s.length % 2 != 0) return false;
+    const stack = [];
+    
+    for(let i = 0; i < s.length; i++) {
+        if(s[i] === "("){
+            stack.push(s[i]);
+        } else if(s[i] === ")") {
+            if(stack.length === 0){
+                return false;
+            } else {
+                stack.pop();    
+            }
+        }
     }
-  }
-  if (stack.length === 0) {
-    return true;
-  } else {
-    return false;
-  }
+
+    return stack.length === 0 ? true : false;
 }
