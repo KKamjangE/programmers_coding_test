@@ -1,21 +1,20 @@
 function solution(k, dungeons) {
-  let ans = 0;
-  let visited = Array(dungeons.length).fill(false);
-  const DFS = (curr, count) => {
-    if (ans < count) {
-      ans = count;
+    let ans = 0;
+    const visited = new Array(dungeons.length).fill(false);
+    
+    const DFS = (currK, count) => {
+        if(ans < count) ans = count;
+        
+        dungeons.forEach(([minK, conK], idx) => {
+            if(minK <= currK && !visited[idx]){
+                visited[idx] = true;
+                DFS(currK - conK, count + 1);
+                visited[idx] = false;
+            }
+        })
     }
-
-    dungeons.forEach((value, idx) => {
-      if (!visited[idx] && curr >= value[0]) {
-        visited[idx] = true;
-        DFS(curr - value[1], count + 1);
-        visited[idx] = false;
-      }
-    });
-  };
-
-  DFS(k, 0);
-
-  return ans;
+    
+    DFS(k, 0);
+    
+    return ans;
 }
