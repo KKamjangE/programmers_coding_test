@@ -1,39 +1,35 @@
 function solution(n, wires) {
-  let ans = 1e9;
+    let ans = n;
+    let graph = Array.from({length: n + 1}, () => new Array);
 
-  let graph = Array.from({ length: n + 1 }, () => []); // 간선 그래프 생성
+    const BFS = (start, except) => {
+        const que = [[start]];
+        const visited = new Array(n + 1).fill(false);
+        let count = 1;
+        visited[start] = true;
 
-  wires.forEach(([a, b]) => {
-    // 간선 그래프 초기화
-    graph[a].push(b);
-    graph[b].push(a);
-  });
-
-  const BFS = (start, except) => {
-    let visited = Array(n + 1).fill(false); // 방문 처리 배열
-    let count = 1; // 노드 개수 카운팅
-    let que = [[start]]; // 큐
-    visited[start] = true; // 방문 처리
-
-    while (que.length > 0) {
-      q = que.shift();
-      graph[q].forEach((value) => {
-        if (value != except && !visited[value]) {
-          // 끊은 노드부분을 제외한 노드들을 순회
-          count += 1;
-          visited[value] = true;
-          que.push(value);
+        while(que.length > 0){
+            q = que.shift();
+            graph[q].forEach((v) => {
+                if(v != except && !visited[v]){
+                    visited[v] = true;
+                    que.push(v);
+                    count += 1;
+                }
+            })
         }
-      });
+        
+        return count;
     }
-
-    return count;
-  };
-
-  wires.forEach(([a, b]) => {
-    // 간선 순회
-    ans = Math.min(ans, Math.abs(BFS(a, b) - BFS(b, a)));
-  });
-
-  return ans;
+    
+    wires.forEach(([v1, v2]) => {
+        graph[v1].push(v2);
+        graph[v2].push(v1);
+    })
+    
+    wires.forEach(([a, b]) => {
+        ans = Math.min(ans, Math.abs(BFS(a, b) - BFS(b, a)));
+    })
+    
+    return ans;
 }
