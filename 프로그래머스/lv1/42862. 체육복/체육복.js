@@ -1,22 +1,21 @@
 function solution(n, lost, reserve) {
-  const students = Array.from({ length: n + 1 }, () => 1);
-  lost.forEach((l) => students[l]--);
-  reserve.forEach((r) => students[r]++);
+    const arr = new Array(n + 1).fill(0);
+    lost.forEach((idx) => {
+        arr[idx] -= 1;
+    })
+    reserve.forEach((idx) => {
+        arr[idx] += 1;
+    })
 
-  let count = 0;
-  students.forEach((student, i) => {
-    if (student === 0) {
-      if (students[i - 1] === 2) {
-        students[i - 1]--;
-        student++;
-      } else if (students[i + 1] === 2) {
-        students[i + 1]--;
-        student++;
-      } else {
-        count++;
-      }
+    for(let i = 2; i < arr.length; i++){
+        if (arr[i] === -1 && arr[i-1] === 1){
+            arr[i] = 0;
+            arr[i-1] = 0;
+        }else if (arr[i] === 1 && arr[i-1] === -1){
+            arr[i] = 0;
+            arr[i-1] = 0;
+        }
     }
-  });
-
-  return n - count;
+    
+    return arr.filter((val) => val >= 0).length - 1;
 }
