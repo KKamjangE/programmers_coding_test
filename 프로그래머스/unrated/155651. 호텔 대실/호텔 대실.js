@@ -1,19 +1,19 @@
-function makeMinStamp(time) {
-  const [hour, min] = time.split(":").map((v) => Number(v));
-  return hour * 60 + min;
-}
-
 function solution(book_time) {
-  const timeArr = Array.from({ length: makeMinStamp("23:59") + 10 }, () => 0);
-
-  book_time.forEach((time, i) => {
-    const [s, e] = time;
-    let start = makeMinStamp(s);
-    const end = makeMinStamp(e) + 9;
-
-    for (start; start <= end; start++) {
-      timeArr[start]++;
+    let ans = 0;
+    const timeToMin = (str) => {
+        const [hour, min] = str.split(":").map((value) => parseInt(value));
+        return hour * 60 + min;
     }
-  });
-  return Math.max(...timeArr);
+    
+    const timeLine = new Array(timeToMin("23:59") + 10).fill(0);
+    book_time.forEach(([s, e]) => {
+        const start = timeToMin(s);
+        const end = timeToMin(e) + 9;
+        
+        for(let i = start; i <= end; i++){
+            timeLine[i] += 1;
+        }
+    });
+    
+    return Math.max(...timeLine);
 }
