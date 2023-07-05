@@ -1,11 +1,13 @@
 function solution(sizes) {
-    const ans = sizes.map((value) => value.sort((a, b) => b - a));
-    let x = 0;
-    let y = 0;
-    ans.forEach(([w, h]) => {
-        x = Math.max(x, w);
-        y = Math.max(y, h);
-    })
-    
-    return x * y;
+  let width = 0;
+  let height = 0;
+
+  sizes.forEach((value) => {
+    value.sort((a, b) => a - b);
+    const [w, h] = value;
+    width = Math.max(w, width);
+    height = Math.max(h, height);
+  });
+
+  return width * height;
 }
