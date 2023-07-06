@@ -1,29 +1,28 @@
 function solution(n, computers) {
-    let ans = 0;
-    const visited = new Array(n).fill(false);
+  let ans = 0;
 
-    
-    const BFS = (start) => {
-        const que = [start];
-        visited[start] = true;
-        
-        while(que.length > 0){
-            q = que.shift();
-            computers[q].forEach((v, idx) => {
-                if(!visited[idx] && v === 1){
-                    visited[idx] = true;
-                    que.push(idx);
-                }
-            })
+  const visited = Array(n).fill(false);
+
+  const BFS = (start) => {
+    const que = [start];
+
+    while (que.length > 0) {
+      q = que.shift();
+      computers[q].forEach((value, idx) => {
+        if (!visited[idx] && value === 1) {
+          visited[idx] = true;
+          que.push(idx);
         }
+      });
     }
-    
-    for(let i = 0; i < n; i++){
-        if(!visited[i]){
-            BFS(i);
-            ans += 1;
-        }
+  };
+
+  for (let i = 0; i < n; i++) {
+    if (!visited[i]) {
+      BFS(i);
+      ans += 1;
     }
-    
-    return ans;
+  }
+
+  return ans;
 }
