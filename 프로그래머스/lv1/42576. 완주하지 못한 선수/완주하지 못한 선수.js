@@ -1,10 +1,17 @@
 function solution(participant, completion) {
-    participant.sort();
-    completion.sort();
+    const obj = {};
     
-    for(let i = 0; i < participant.length; i++){
-        if(participant[i] != completion[i]){
-            return participant[i]
+    participant.forEach((value) => {
+        if(!obj[value]){
+            obj[value] = 1;    
+        } else {
+            obj[value] += 1;
         }
-    }
+    });
+    
+    completion.forEach((value) => {
+        obj[value] -= 1;
+    });
+    
+    return Object.keys(obj).filter((key) => obj[key] > 0)[0];
 }
