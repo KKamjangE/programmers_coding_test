@@ -1,20 +1,17 @@
 function solution(progresses, speeds) {
-    let ans = [];
+    const stack = [];
     let day = 1;
-    let end = 0;
-    let index = 0;
-    
-    while(progresses.length > index){
-        end = 0;
-        while(progresses[index] + (speeds[index] * day) >= 100){
-            end++;
-            index++;
+    while(progresses.length > 0){
+        let temp = 0;
+        while(progresses[0] + day * speeds[0] >= 100){
+            progresses.shift();
+            speeds.shift();
+            temp += 1;
         }
-        if(end > 0){
-            ans.push(end);
+        if(temp > 0){
+            stack.push(temp);    
         }
-        day++;
+        day += 1;
     }
-    
-    return ans;
+    return stack;
 }
