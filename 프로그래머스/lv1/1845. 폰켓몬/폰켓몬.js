@@ -1,10 +1,13 @@
 function solution(nums) {
-    let ans = [... new Set(nums)];
-    let n = nums.length / 2;
-    
-    if(ans.length >= n){
-        return n;
-    }else {
-        return ans.length;
-    }
+  const obj = new Set();
+
+  nums.forEach((value) => {
+    obj.add(value);
+  });
+
+  if (obj.size > nums.length / 2) {
+    return nums.length / 2;
+  } else {
+    return obj.size;
+  }
 }
