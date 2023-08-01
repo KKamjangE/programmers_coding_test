@@ -1,13 +1,14 @@
 function solution(sizes) {
-  let width = 0;
-  let height = 0;
-
-  sizes.forEach((value) => {
-    value.sort((a, b) => a - b);
-    const [w, h] = value;
-    width = Math.max(w, width);
-    height = Math.max(h, height);
-  });
-
-  return width * height;
+    sizes.forEach((item) => {
+        item.sort((a, b) => a - b);
+    });
+    
+    const maxSize = [0, 0];
+    
+    sizes.forEach(([x, y]) => {
+        maxSize[0] = Math.max(maxSize[0], y);
+        maxSize[1] = Math.max(maxSize[1], x);
+    })
+    
+    return maxSize[0] * maxSize[1];
 }
