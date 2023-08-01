@@ -1,11 +1,10 @@
 function solution(array, commands) {
-    let ans = [];
-    
-    commands.forEach(([start, end, idx]) => {
-        let tmp = array.slice(start - 1, end);
-        tmp.sort((a, b) => a - b);
-        ans.push(tmp[idx - 1])
-    })
+    const ans = [];
+    commands.forEach(([start, end, index]) => {
+        const temp = array.slice(start - 1, end);
+        temp.sort((a, b) => a - b);
+        ans.push(temp[index - 1]);
+    });
     
     return ans;
 }
