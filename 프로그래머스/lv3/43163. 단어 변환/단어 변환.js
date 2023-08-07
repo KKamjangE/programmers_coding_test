@@ -1,34 +1,23 @@
 function solution(begin, target, words) {
-    let ans = 0;
-    if(!words.includes(target)) return 0; // 문자열 배열안에 target이 없다면 0
+    const visited = new Array(words.length).fill(false); // 방문 처리 배열
     
-    const visited = new Array(words.length).fill(false); // 방문 처리
-    
-    const BFS = (word, start) => {
-        que = [[word, start]]; // 시작 문자열, 단계
+    const que = [[begin, 0]]; // 시작 문자열, 변환된 횟수
         
-        while(que.length > 0){
-            const [q, count] = que.shift();
-            if(q === target){ // 현재 문자열이 target과 같다면
-                ans = count; // 몇 단계인지 저장
-                break;
+    while(que.length > 0) {
+        const [word, count] = que.shift();
+        if(word === target) return count; // 타겟 문자와 같다면
+        
+        words.forEach((item, index) => {
+            let temp = 0; // 다른 알파벳 개수 확인용 변수
+            for(let i = 0; i < word.length; i++) { // 다른 알파벳 비교
+                if(word[i] !== item[i]) temp += 1;
             }
-            words.forEach((word, idx) => { // 문자열 배열 순회
-                let diff = 0; // 다른 문자 개수
-                for(let i = 0; i < q.length; i++){ // 문자열 순회
-                    if(word[i] != q[i]){ // 현재 문자열과 문자가 다른지 비교
-                        diff += 1;
-                    }
-                }
-                if(diff === 1 && !visited[idx]){ // 다른 문자가 1개라면
-                    visited[idx] = true; // 방문 처리
-                    que.push([word, count + 1]); // 문자열, 단계 + 1
-                }
-            });
-        }
+            if(!visited[index] && temp === 1){ // 방문 하지 않았고 알파벳 개수가 1개만 다르다면
+                que.push([item, count + 1]);
+                visited[index] = true; // 방문 처리
+            }
+        });
     }
     
-    BFS(begin, 0);
-    
-    return ans;
+    return 0;
 }
