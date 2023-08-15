@@ -1,10 +1,5 @@
-function solution(A, B) {
-  let ans = 0;
-  A.sort((a, b) => a - b);
-  B.sort((a, b) => b - a);
-  for (let i = 0; i < A.length; i++) {
-    ans += A[i] * B[i];
-  }
-
-  return ans;
+function solution(A,B){
+    A.sort((a, b) => a - b); // 오름차순 정렬
+    B.sort((a, b) => b - a); // 내림차순 정렬
+    return A.reduce((result, value, idx) => result += value * B[idx], 0); // 곱한값 연산
 }
