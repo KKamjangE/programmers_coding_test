@@ -1,16 +1,17 @@
 function solution(s) {
-  let stack = []; // 스택 자료구조
-
-  if (s.length % 2 != 0) return 0;
-  // 매개변수 문자열 순회
-  [...s].forEach((value) => {
-    // 스택이 비어있지 않고 스택 맨 위 값이 현재 값과 같다면
-    if (stack.length && stack[stack.length - 1] === value) {
-      stack.pop();
-    } else {
-      stack.push(value);
+    const stack = [];
+    
+    for(const str of s){
+        if(stack.length === 0){ // 스택에 요소가 없으면 추가
+            stack.push(str);
+            continue;
+        }
+        if(stack[stack.length - 1] === str){ // 스택 맨 위 요소와 같으면
+            stack.pop(); // 제거
+        } else {
+            stack.push(str); // 다르면 추가
+        }
     }
-  });
-
-  return stack.length === 0 ? 1 : 0;
+    
+    return stack.length === 0 ? 1 : 0; // 스택에 요소가 없으면 1 아니면 0
 }
