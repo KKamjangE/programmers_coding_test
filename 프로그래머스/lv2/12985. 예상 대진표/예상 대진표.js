@@ -1,11 +1,11 @@
-function solution(n, a, b) {
-  let ans = 1;
-
-  while (Math.ceil(a / 2) !== Math.ceil(b / 2)) {
-    a = Math.ceil(a / 2);
-    b = Math.ceil(b / 2);
-    ans += 1;
-  }
-
-  return ans;
+function solution(n,a,b) {
+    let ans = 0;
+    
+    while(a !== b){
+        a = Math.ceil(a / 2); // 소수점 이하를 올림
+        b = Math.ceil(b / 2); // 소수점 이하를 올림
+        ans += 1 // 라운드 + 1
+    }
+    
+    return ans;
 }
