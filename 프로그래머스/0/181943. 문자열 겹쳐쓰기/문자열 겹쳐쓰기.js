@@ -1,5 +1,3 @@
 function solution(my_string, overwrite_string, s) {
-    const newString = my_string.split("")
-    newString.splice(s, overwrite_string.length, ...overwrite_string.split(""))
-    return newString.join("")
+    return my_string.slice(0, s)+overwrite_string+my_string.slice(s+overwrite_string.length)
 }
