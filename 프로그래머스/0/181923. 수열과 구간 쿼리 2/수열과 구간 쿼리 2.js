@@ -1,10 +1,6 @@
 function solution(arr, queries) {
-    const anw = []
-    queries.forEach((item) => {
+    return queries.map((item) => {
         const [s, e, k] = item
-        const minVal = Math.min(...arr.slice(s, e + 1).filter((item) => item > k))
-        anw.push(minVal !== Infinity ? minVal : -1)
+        return arr.slice(s, e + 1).filter((item) => item > k).sort((a, b) => a - b)[0] ?? -1
     })
-    
-    return anw
 }
