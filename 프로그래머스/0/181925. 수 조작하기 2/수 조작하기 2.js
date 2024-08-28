@@ -5,5 +5,5 @@ function solution(numLog) {
         "10": 'd',
         "-10": 'a'
     }
-    return numLog.map((item, index) => controler[numLog[index + 1] - item]).join('')
+    return numLog.slice(1).map((item, index) => controler[item - numLog[index]]).join('')
 }
