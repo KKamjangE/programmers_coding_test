@@ -1,10 +1,25 @@
+function* gen() {
+    let i = 1;
+    
+    while(true){
+        yield Number(Number(i).toString(2)) * 5
+        i++
+    }
+}
+
 function solution(l, r) {
+    const n = gen()
+    let a = 0
     const arr = []
-    for(let num=l;num<=r;num++){
-        if((num + "").split("").every((item) => item === "5" || item === "0")) arr.push(num)
+    
+    while(a < l) {
+        a = n.next().value;
     }
     
-    if(arr.length === 0) arr.push(-1)
+    while(a <= r){
+        arr.push(a);
+        a = n.next().value;
+    }
     
-    return arr
+    return arr.length ? arr : [-1]
 }
