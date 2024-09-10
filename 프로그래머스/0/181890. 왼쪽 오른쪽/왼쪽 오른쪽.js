@@ -1,10 +1,8 @@
 function solution(str_list) {
-    const L = str_list.indexOf('l')
-    const R = str_list.indexOf("r")
-    const RArr = str_list.slice(R + 1)
-    const LArr = str_list.slice(0, L)
-    if(L < 0 && R < 0) return []
-    if(L < 0) return RArr
-    if(R < 0) return LArr
-    return L > R ? RArr : LArr
+    for(let i=0;i<str_list.length;i++){
+        if(str_list[i] === 'l') return str_list.slice(0, i)
+        if(str_list[i] === 'r') return str_list.slice(i + 1)
+    }
+    
+    return []
 }
