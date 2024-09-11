@@ -1,3 +1,3 @@
 function solution(numbers, n) {
-    return numbers.reduce((prev, curr) => prev <= n ? prev + curr : prev ,0)
+    return numbers.reduce((acc, curr) => acc += acc <= n ? curr : 0, 0)
 }
