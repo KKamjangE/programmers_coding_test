@@ -1,14 +1,14 @@
 function solution(priorities, location) {
-    let ans = 0
-    const queue = priorities.map((item, index) => [item, index])
-    
-    while(queue.length) {
+    let ans = 0;
+    const queue = priorities.map((item, index) => ({prioirity: item, location: index === location}))
+
+    while(true) {
         const prosess = queue.shift()
-        if(queue.some((item) => item[0] > prosess[0])) {
+        if(queue.some((item) => item.prioirity > prosess.prioirity)) {
             queue.push(prosess)
         } else {
-            ans++
-            if(prosess[1] === location) break
+            ans++ 
+            if(prosess.location) break
         }
     }
     
