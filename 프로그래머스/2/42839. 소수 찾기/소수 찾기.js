@@ -10,9 +10,9 @@ function solution(numbers) {
     
     const DFS = (fix, arr) => {
         if(arr.length === 0) return
+        
         arr.forEach((item, i) => {
             if(isPrime(+(fix + item))) {
-                // console.log(fix + item)
                 ans.add(+(fix + item))
             }
             const temp = [...arr]
@@ -20,7 +20,8 @@ function solution(numbers) {
             DFS(fix + item, temp)
         })
     }
-    DFS("", numbers.split(''))
     
+    DFS('', [...numbers])
+    console.log(ans)
     return ans.size
 }
