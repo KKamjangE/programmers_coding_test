@@ -1,6 +1,5 @@
 function solution(n, wires) {
-    let ans = n
-    const graph = Array.from({length: n + 1}, () => new Array())
+    const graph = Array.from({length: n + 1}, () => [])
     
     wires.forEach(([v1, v2]) => {
         graph[v1].push(v2)
@@ -8,24 +7,24 @@ function solution(n, wires) {
     })
     
     const BFS = (start, except) => {
+        let count = 0
         const visited = Array.from({length: n + 1}, () => false)
         const que = [start]
         visited[start] = true
-        let count = 0
-        
         while(que.length > 0) {
             const q = que.shift()
             graph[q].forEach((value) => {
-                if(!visited[value] && value !== except) {
+                if(!visited[value] && except !== value) {
                     que.push(value)
                     visited[value] = true
-                    count += 1
+                    count++
                 }
             })
         }
-        
         return count
     }
+    
+    let ans = n
     
     wires.forEach(([v1, v2]) => {
         ans = Math.min(ans, Math.abs(BFS(v1, v2) - BFS(v2, v1)))
