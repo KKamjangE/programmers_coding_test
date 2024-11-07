@@ -1,34 +1,30 @@
 function solution(n, wires) {
     const graph = Array.from({length: n + 1}, () => [])
-    
     wires.forEach(([v1, v2]) => {
-        graph[v1].push(v2)
         graph[v2].push(v1)
+        graph[v1].push(v2)
     })
     
-    const BFS = (start, except) => {
-        let count = 0
-        const visited = Array.from({length: n + 1}, () => false)
-        const que = [start]
+    const visited = Array.from({length: n + 1}, () => false)
+    
+    const DFS = (start, except) => {
+        if(visited[start]) return
         visited[start] = true
-        while(que.length > 0) {
-            const q = que.shift()
-            graph[q].forEach((value) => {
-                if(!visited[value] && except !== value) {
-                    que.push(value)
-                    visited[value] = true
-                    count++
-                }
-            })
-        }
-        return count
+        
+        graph[start].forEach((v) => {
+            if(!visited[v] && v !== except) {
+                DFS(v, except)
+            }
+        })        
     }
     
-    let ans = n
-    
-    wires.forEach(([v1, v2]) => {
-        ans = Math.min(ans, Math.abs(BFS(v1, v2) - BFS(v2, v1)))
-    })
-    
-    return ans
+    return wires.reduce((ans, [v1, v2]) => {
+        DFS(v1, v2)
+        const a = visited.slice(1).filter((v) => v).length
+        const b = n - a
+        ans = Math.min(ans, Math.abs(a - b))
+        visited.fill(false)
+        count = 0
+        return ans
+    }, n)
 }
