@@ -1,19 +1,24 @@
 function solution(name) {
-    let ans = 0
-    let move = name.length - 1;
-
-    [...name].forEach((str, i) => {
-        let code = str.charCodeAt()
-        ans += Math.min(code - 65, 91 - code)
+    let UD = 0
+    let LR = name.length - 1;
+    
+    [...name].forEach((str, index) => {
+        UD += Math.min(str.charCodeAt() - 65, 91 - str.charCodeAt())
         
-        let idx = i + 1
+        let next = index + 1
         
-        while(name[idx] === "A" && idx < name.length) {
-            idx += 1
+        while(name[next] === "A" && next < name.length) {
+            next++
         }
         
-        move = Math.min(move, i * 2 + name.length - idx, i + 2 * (name.length - idx))
+        LR = Math.min(
+                        LR,
+                        index * 2 + name.length - next, // -> 오른쪽으로 현재 위치 * <- 돌아옴 + <- 왼쪽으로 처리
+                        index + 2 * (name.length - next) // <- 왼쪽부터 처리 + 돌아와서 오른쪽으로 처리
+                     )
+        console.log(LR)
+        console.log(`${index} + 2 * (${name.length} - ${next})`)
     })
     
-    return ans + move
+    return UD + LR
 }
