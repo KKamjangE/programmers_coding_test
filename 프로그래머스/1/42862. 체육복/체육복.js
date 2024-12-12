@@ -1,19 +1,19 @@
 function solution(n, lost, reserve) {
-    const arr = Array.from({length: n + 1}, () => 0)
-    lost.forEach((item) => arr[item - 1] -= 1)
-    reserve.forEach((item) => arr[item - 1] += 1)
-    
-    arr.forEach((item, index) => {
-        if(item > 0) {
-            if(arr[index - 1] < 0){
-                arr[index - 1] += 1
-                arr[index] -= 1
-            } else if (arr[index + 1] < 0) {
-                arr[index + 1] += 1
-                arr[index] -= 1
+    const arr = Array.from({length: n + 1}, () => 1)
+    lost.forEach((v) => arr[v] -= 1)
+    reserve.forEach((v) => arr[v] += 1)
+
+    arr.forEach((v, i) => {
+        if(v > 1) {
+            if(arr[i-1] < 1) {
+            arr[i] -= 1
+            arr[i-1] += 1
+            } else if (arr[i + 1] < 1) {
+                arr[i] -= 1
+                arr[i + 1] += 1
             }
         }
     })
     
-    return arr.filter((item) => item >= 0).length - 1
+    return arr.filter((v) => v).length - 1
 }
